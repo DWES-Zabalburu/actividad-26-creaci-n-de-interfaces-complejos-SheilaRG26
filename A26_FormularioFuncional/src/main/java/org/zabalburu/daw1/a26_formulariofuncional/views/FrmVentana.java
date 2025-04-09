@@ -6,6 +6,7 @@ package org.zabalburu.daw1.a26_formulariofuncional.views;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -47,10 +48,11 @@ public class FrmVentana extends JFrame{
     
     private JPanel pnlDatos = new JPanel (new GridLayout(10,2,0,10));
     private JPanel pnlBotones = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+    private JPanel pnlTitulo = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private Color COLOR_FONDO = new Color(66, 152, 201);
     private Color COLOR_TEXTO = new Color (0,0,153);
     private final Font FUENTE = new Font("Calibri",Font.PLAIN,22);
-    private MatteBorder MBLinea = new MatteBorder(0,0,3,0, COLOR_FONDO);
+   // private MatteBorder MBLinea = new MatteBorder(0,0,3,0, COLOR_FONDO);
     
         public FrmVentana(){
                 
@@ -59,14 +61,25 @@ public class FrmVentana extends JFrame{
             
             
             //TITULO
-            lblTitulo.setFont(new Font("Calibri",Font.BOLD,32));
-            lblTitulo.setHorizontalAlignment(JLabel.LEFT);
-            lblTitulo.setForeground(new Color(255,255,255));
-            lblTitulo.setOpaque(true);
-            lblTitulo.setBackground(COLOR_FONDO);
-            lblTitulo.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
-            this.add(lblTitulo, BorderLayout.NORTH); //Posición del titulo
             
+            pnlTitulo.add(lblTitulo);
+            lblTitulo.setFont(new Font("Calibri",Font.BOLD,32));
+            lblTitulo.setForeground(new Color(255,255,255));
+            pnlTitulo.setBackground(COLOR_FONDO);
+            lblTitulo.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+            this.add(pnlTitulo, BorderLayout.NORTH); //Posición del titulo. Etiqueta que ocupa todo el espacio.
+            
+            /*Esto sería solo las etiquetas, arriba esta hecho el titulo como panel*/
+            // lblTitulo.setHorizontalAlignment(JLabel.LEFT);
+            //lblTitulo.setOpaque(true);
+            
+            /*Puedes hacer un panel para cada seccion y 
+            luego añadirle las etiquetas dentro.
+            Al hacerlo con panel, no tienes que alinear horizontalmente, se alinea solo.
+            Si quieres moverlo de lado, en plan dcha o izq:
+            privateJPanel pnlTitulo = new Jpanel(new FlowLayout(FlowLayout.LEFT));
+            */
+           
             
             //PANEL CENTRAL DE DATOS
             
@@ -83,41 +96,65 @@ public class FrmVentana extends JFrame{
             pnlDatos.add(lblSitioWeb);
             pnlDatos.add(txtSitioWeb);
             
+            
+            
+            for(Component c : pnlDatos.getComponents()){
+               if( c instanceof JTextField){
+                JTextField txt = (JTextField) c;
+                txt.setBorder(BorderFactory.createCompoundBorder(
+                        BorderFactory.createMatteBorder(0,0,2,0, COLOR_FONDO),
+                        BorderFactory.createEmptyBorder(5,2,2,2)
+                        
+                        /*Con esto generamos un bordecito 1mm por encima del borde. Algo así*/
+                ));
+                txt.setFont(new Font ("Calibri",Font.PLAIN,18));
+               }
+            }
+            
+            
+                /*Bordes del panel*/
+            pnlDatos.setBorder(BorderFactory.createEmptyBorder(0,20,0,20));
+               /*Posicionar el panel de Datos */
+            this.add(pnlDatos, BorderLayout.CENTER);
+            
+            /*
+            A mano, dando un borde mate simple a cada caja de texto.
             txtNombre.setBorder(MBLinea);
             txtCorreoE.setBorder(MBLinea);
             txtTelefono.setBorder(MBLinea);
             txtDireccion.setBorder(MBLinea);
             txtSitioWeb.setBorder(MBLinea);
+            */
             
             
-            pnlDatos.setBorder(BorderFactory.createEmptyBorder(0,20,0,20));
             
-                /*Posicionar el panel de Datos */
-            this.add(pnlDatos, BorderLayout.CENTER);
+             
             
             
             
             //BOTONES
-                /*fuente*/
-            btnCancelar.setFont(new Font("Calibri",Font.PLAIN,12));
-            btnEnviar.setFont(new Font("Calibri",Font.PLAIN,12));
+                
                 /*Añadirlos al panel*/
             pnlBotones.add(btnCancelar);
             pnlBotones.add(btnEnviar);
                 /*Bordear panel con espacio*/
             pnlBotones.setBorder(BorderFactory.createEmptyBorder(10,20,10,20));
                 /*Colorearlos*/
-            btnCancelar.setBackground(Color.GRAY);
+            btnCancelar.setBackground(Color.LIGHT_GRAY);
             btnEnviar.setBackground(COLOR_FONDO);
-            btnEnviar.setForeground(new Color(255,255,255));
-            btnCancelar.setForeground(new Color(255,255,255));
-            btnCancelar.setPreferredSize(new Dimension(140,40));
-            btnEnviar.setPreferredSize(new Dimension(140,40));
+                 //Cada uno tiene un color, si no podrian ir denro del FOR
             
-                /*Bordes botones*/
-            btnCancelar.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
-            btnEnviar.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
-           
+            
+            for(Component c : pnlBotones.getComponents()){
+                JButton b = (JButton) c;
+                b.setBorder(null);
+                b.setPreferredSize(new Dimension(170, 50));
+                b.setForeground(Color.WHITE);
+                b.setFont(new Font("Calibri",Font.PLAIN,12));
+                
+            }
+            
+              
                 /*Posicionar el panel*/
             this.add(pnlBotones, BorderLayout.SOUTH);
             

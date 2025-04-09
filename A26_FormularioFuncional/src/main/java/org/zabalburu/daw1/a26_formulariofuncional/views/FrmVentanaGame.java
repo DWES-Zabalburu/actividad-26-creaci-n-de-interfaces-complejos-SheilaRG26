@@ -43,6 +43,7 @@ public class FrmVentanaGame extends JFrame{
     private JPanel pnlBotones = new JPanel(new FlowLayout(FlowLayout.RIGHT));
     private Color COLOR_FONDO = new Color(27, 28, 26);
     private Color COLOR_TEXTO = new Color (69, 240, 17);
+    private Color COLOR_TXT = new Color(31, 43, 32);
     private final Font FUENTE = new Font("Calibri",Font.PLAIN,22);
     private MatteBorder MBLinea = new MatteBorder(1,1,1,1, new Color(69, 240, 17));
       
@@ -56,7 +57,7 @@ public class FrmVentanaGame extends JFrame{
             lblTitulo.setHorizontalAlignment(JLabel.CENTER);
             lblTitulo.setForeground(COLOR_TEXTO);
             lblTitulo.setOpaque(true);
-            lblTitulo.setBackground(COLOR_FONDO);
+            lblTitulo.setBackground(COLOR_TXT);
             lblTitulo.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
             this.add(lblTitulo, BorderLayout.NORTH); //Posición del titulo
 
@@ -73,8 +74,16 @@ public class FrmVentanaGame extends JFrame{
             pnlDatos.add(pwdPassword);
             
             txtEmail.setBorder(MBLinea);
+            txtEmail.setOpaque(true);
+            txtEmail.setBackground(COLOR_TXT);
+            
             txtGamerTag.setBorder(MBLinea);
+            txtGamerTag.setOpaque(true);
+            txtGamerTag.setBackground(COLOR_TXT);
+            
             pwdPassword.setBorder(MBLinea);
+            pwdPassword.setOpaque(true);
+            pwdPassword.setBackground(COLOR_TXT);
             
             pnlDatos.setBorder(BorderFactory.createEmptyBorder(0,20,0,20));
             pnlDatos.setBackground(COLOR_FONDO);
@@ -105,6 +114,7 @@ public class FrmVentanaGame extends JFrame{
             
             pnlBotones.setBackground(COLOR_FONDO);
             this.add(pnlBotones, BorderLayout.SOUTH);
+            
             
             //VENTANA
             this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
